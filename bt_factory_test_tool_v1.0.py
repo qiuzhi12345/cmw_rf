@@ -1,4 +1,5 @@
 #  -*- coding: utf-8 -*-
+from imp import reload
 
 # Form implementation generated from reading ui file 'bt__rf_test_tool_v1.2.ui'
 #
@@ -6,22 +7,22 @@
 #
 # WARNING! All changes made in this file will be lost!
 
-from PyQt4 import QtCore, QtGui
-from PyQt4.QtCore import *
-from PyQt4.QtGui import *
+from PyQt4 import QtCore, QtGui,Qt
+from PyQt4.QtCore import QRegExp, QTimer
+from PyQt4.QtGui import QMainWindow, QFileDialog, QApplication, QAbstractItemView, QRegExpValidator, QIntValidator, QMessageBox
 
 import sys
 reload(sys)
 sys.setdefaultencoding('ISO-8859-1')
 import random
-
+import exceptions
 
 from subprocess import Popen
 from threading import Thread
 import time
 import subprocess
 import threading
-from PyQt4.QtCore import *
+
 from bt_factory_test_tool_mainwindown import Ui_MainWindow
 # from rftest.testcase.performance.bt_test_cmw import *
 # from hal.common import *
@@ -169,7 +170,7 @@ class MyWindow(QMainWindow,Ui_MainWindow):
         self.emitting.write(msg)
 
     def msg_debug(self):
-        QMessageBox.about(self,'info','debug')
+        QtGui.QMessageBox.about(self,'info','debug')
 
     def line_edit_event(self):
         self.line_edit_range()
@@ -422,7 +423,7 @@ class MyWindow(QMainWindow,Ui_MainWindow):
         复位仪器，打开信令模式，配置好RF参数和蓝牙包的参数，inquire EUT的BD，paging EUT并连接EUT。
         '''
         if rate not in ('BR','EDR'):
-            raise StandardError('rate command wrong')
+            raise exceptions.StandardError('rate command wrong')
         self.config_para_init()
         self.csp.reset()    #复位cmw设置
         self.csp.clean()
@@ -677,18 +678,18 @@ class MyWindow(QMainWindow,Ui_MainWindow):
         items = [row,wstr_bd, wstr_time, wstr_pf]
         self.tableWidget.insertRow(row)
 
-        self.mycheckbox = QCheckBox()
+        self.mycheckbox = QtGui.QCheckBox()
         self.mycheckbox.setChecked(True)
 
-        newqwidget = QWidget()
-        newlayout = QHBoxLayout()
+        newqwidget = QtGui.QWidget()
+        newlayout = QtGui.QHBoxLayout()
         newlayout.setContentsMargins(0,0,0,0)
         newlayout.setAlignment(Qt.AlignCenter)
         newlayout.addWidget(self.mycheckbox)
         newqwidget.setLayout(newlayout)
 
         for j in range(len(items)):
-            newitem = QTableWidgetItem(str(items[j]))
+            newitem = QtGui.QTableWidgetItem(str(items[j]))
             newitem.setTextAlignment(Qt.AlignCenter)
 
             if items[j] == 'pass':

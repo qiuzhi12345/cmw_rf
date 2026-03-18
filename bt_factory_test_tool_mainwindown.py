@@ -1794,7 +1794,7 @@ class Ui_MainWindow(object):
         __sortingEnabled = self.tableWidget.isSortingEnabled()
         self.tableWidget.setSortingEnabled(False)
         item = self.tableWidget.item(0, 0)
-        item.setText(_translate("MainWindow", "number", None))
+        item.setText(_translate("MainWindow", "Num.", None))
         item = self.tableWidget.item(0, 1)
         item.setText(_translate("MainWindow", "DUT Addr", None))
         item = self.tableWidget.item(0, 2)
